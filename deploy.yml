@@ -1,0 +1,33 @@
+name: Website CI
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check website files
+        run: |
+          echo "Checking website..."
+          ls -la
+
+      - name: Verify index.html
+        run: |
+          if [ -f index.html ]; then
+            echo "index.html found!"
+          else
+            echo "index.html not found!"
+            exit 1
+          fi
+
+      - name: Website build successful
+        run: echo "Website CI completed successfully!"
